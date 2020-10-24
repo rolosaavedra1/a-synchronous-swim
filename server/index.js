@@ -3,9 +3,11 @@
 
 const keypressHandler = require('./js/keypressHandler');
 //everything that comes into the server has to come through this module first
-keypressHandler.initialize(message => console.log(`Message received: ${message}`));
 
+const queue = require('./js/messageQueue.js')
+keypressHandler.initialize(message => queue.enqueue(message));
 const httpHandler = require('./js/httpHandler');
+httpHandler.initialize(queue);
 
 //instanstiates http object
 const http = require('http');

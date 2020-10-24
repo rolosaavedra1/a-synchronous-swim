@@ -2,7 +2,6 @@
 (function () {
 
   const serverUrl = 'http://127.0.0.1:3000';
-
   //
   // TODO: build the swim command fetcher here
   // GUESS 1 send a ajax GET request for the current values stored in messages in server
@@ -10,20 +9,30 @@
     $.ajax({
       type: 'GET',
       url: serverUrl,
-      cache: false,
-      contentType: false,
-      processData: false,
       success: (data) => {
-        console.log(data);
         SwimTeam.move(data);
-        console.log('success!');
       },
-      error: (err) => {
-        console.log('We have failed!');
+      complete: () => {
+        setTimeout(executeChoreography, 5000);
       }
     });
-  }
-  setInterval(executeChoreography, 5000);
+  };
+  executeChoreography();
+ //ajax request should return a url/filepath that allows the success(data) function to render the background image retrieved from the server
+  const getBackground = () => {
+    $.ajax({
+      type: 'GET',
+      url: serverUrl,
+      dataType: text,
+      success: (data) => {
+        console.log(data)
+
+      }
+      error: () = {
+        console.log('unable to get background image')
+      };
+    })
+  };
 
   //NOTE: previous commands must be cleared in response to a successful FETCH request
 
@@ -38,7 +47,7 @@
     $.ajax({
       type: 'POST',
       data: formData,
-      url: 'FILL_ME_IN',
+      url: serverUrl,
       cache: false,
       contentType: false,
       processData: false,
@@ -64,7 +73,7 @@
       return;
     }
 
-    ajaxFileUplaod(file);
+    //ajaxFileUplaod(file);
   });
 
 })();

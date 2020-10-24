@@ -1,5 +1,5 @@
 //where does messages live once I am running the server
-const messages = ['left', 'up', 'right', 'down', 'left', 'up', 'right', 'down' ]; // the storage unit for messages
+const messages = []; // the storage unit for messages
 //should be thought as a privarty property of the messageQueue class
 // the exported functions are methods, like set and get
 
