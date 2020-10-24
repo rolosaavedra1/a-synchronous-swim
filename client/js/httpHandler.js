@@ -1,12 +1,30 @@
 //this script responds to server https request events. It gets keyboard stroke events and returns the appropriate swim command.
-(function() {
+(function () {
 
   const serverUrl = 'http://127.0.0.1:3000';
 
   //
   // TODO: build the swim command fetcher here
-  // GUESS 1 send a ajax GET request for the current value of command on the server
-  // GUESS 2 send an ajax GET request for a direction value
+  // GUESS 1 send a ajax GET request for the current values stored in messages in server
+  const executeChoreography = () => {
+    $.ajax({
+      type: 'GET',
+      url: serverUrl,
+      cache: false,
+      contentType: false,
+      processData: false,
+      success: (data) => {
+        console.log(data);
+        SwimTeam.move(data);
+        console.log('success!');
+      },
+      error: (err) => {
+        console.log('We have failed!');
+      }
+    });
+  }
+  setInterval(executeChoreography, 5000);
+
   //NOTE: previous commands must be cleared in response to a successful FETCH request
 
   /////////////////////////////////////////////////////////////////////
@@ -31,7 +49,7 @@
     });
   };
 
-  $('form').on('submit', function(e) {
+  $('form').on('submit', function (e) {
     e.preventDefault();
 
     var form = $('form .file')[0];
