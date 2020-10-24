@@ -1,10 +1,13 @@
+//this script responds to server https request events. It gets keyboard stroke events and returns the appropriate swim command.
 (function() {
 
   const serverUrl = 'http://127.0.0.1:3000';
 
   //
   // TODO: build the swim command fetcher here
-  //
+  // GUESS 1 send a ajax GET request for the current value of command on the server
+  // GUESS 2 send an ajax GET request for a direction value
+  //NOTE: previous commands must be cleared in response to a successful FETCH request
 
   /////////////////////////////////////////////////////////////////////
   // The ajax file uplaoder is provided for your convenience!

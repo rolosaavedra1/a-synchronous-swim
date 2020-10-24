@@ -8,10 +8,12 @@ const keypress = require('keypress');
 const validMessages = ['left', 'right', 'up', 'down'];
 const mappedChars = { space: ' ' }; // special mappings
 
+//returns a boolean, check if message is valid
 const isValidMessage = (message) => {
   return _.contains(validMessages, message);
 };
 
+//this tracks keyboard events on the terminal?
 const logKeypress = (key) => {
   // in raw-mode it's handy to see what's been typed
   // when not in raw mode, the terminal will do this for us
@@ -25,7 +27,7 @@ const logKeypress = (key) => {
 ///////////////////////////////////////////////////////////////////////////////
 
 var message = ''; // a buffer to collect key presses
-
+//this module will be invoked like this: intialize(cb) and its output will be an invocation of cb(message or keyboard stroke)
 module.exports.initialize = (callback) => {
 
   // setup an event handler on standard input
@@ -36,11 +38,12 @@ module.exports.initialize = (callback) => {
     }
 
     // check to see if the keypress itself is a valid message
+    //check if keypress is up, down, left or right
     if (isValidMessage(key.name)) {
       callback(key.name);
       return; // don't do any more processing on this key
     }
-    
+
     // otherwise build up a message from individual characters
     if (key && (key.name === 'return' || key.name === 'enter')) {
       // on enter, process the message
@@ -62,6 +65,8 @@ module.exports.initialize = (callback) => {
 // Configuration -- do not modify /////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////
 
+
+//rawMode is when each individual key stroke will be interepreted as a command
 keypress(process.stdin);
 if (process.stdin.setRawMode) {
   // configure stdin for raw mode, if possible

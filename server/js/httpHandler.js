@@ -8,6 +8,7 @@ module.exports.backgroundImageFile = path.join('.', 'background.jpg');
 ////////////////////////////////////////////////////////
 
 let messageQueue = null;
+//this function takes in a queue and sets to equal messageQueue
 module.exports.initialize = (queue) => {
   messageQueue = queue;
 };

@@ -1,3 +1,5 @@
+//for tomorrow. This is how to parse multipart files to be uploaded and be broken down into iamge, etc...
+
 var parser = require('parse-multipart');
 
 module.exports.getBoundary = function(buffer) {
